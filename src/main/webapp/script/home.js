@@ -221,7 +221,7 @@ updateItemForm.addEventListener('submit', function (e) {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    let orderBtn = document.querySelectorAll("updateOrder")
+    let orderBtn = document.querySelectorAll(".updateOrder")
     let modal = document.getElementById("updateOrderModal")
     orderBtn.forEach(function (btn) {
         btn.addEventListener('click', () => {
@@ -242,13 +242,8 @@ updateOrderForm.addEventListener('submit', function (e) {
     fetch("http://localhost:8080/home/orders/updateStatus", {
         method:'POST',
         body:JSON.stringify({
-            item_name: item_name,
-            contact_number: contact_number,
-            address: address,
-            order_quantity: order_quantity,
-            total_amount: 70,
-            status:"Order received",
-            category: "Dairy"
+            id: order_id,
+            status: update_status
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"

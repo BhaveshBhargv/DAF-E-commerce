@@ -1,5 +1,6 @@
 package com.DFA.ecommerce.services;
 
+import com.DFA.ecommerce.exceptions.ItemNotFoundException;
 import com.DFA.ecommerce.models.Orders;
 import com.DFA.ecommerce.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class OrderService {
     }
 
     public void updateOrder(Orders orders) {
-        Orders orders = orderRepository.findById(id).get();
-        orders.setStatus(status);
+        Orders updateOrders = orderRepository.findById(orders.getId()).orElseThrow(() -> new ItemNotFoundException(orders.getId()));;
+        updateOrders.setStatus(orders.getStatus());
         orderRepository.saveAndFlush(orders);
     }
 
