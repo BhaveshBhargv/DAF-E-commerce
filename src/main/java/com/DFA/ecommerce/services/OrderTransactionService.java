@@ -18,7 +18,7 @@ public class OrderTransactionService {
         Long item_id = transactionRequestDto.getItem_id();
         Items items = itemService.getItemById(item_id);
         if (items.getQuantity() < transactionRequestDto.getQuantity()){
-            throw new Exception("Not Sufficient quantity");
+            throw new Exception("Order quantity exceeds available quantity");
         }
         else {
             Orders orders = new Orders();
