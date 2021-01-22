@@ -1,5 +1,6 @@
 package com.DFA.ecommerce.services;
 
+import com.DFA.ecommerce.exceptions.QuantityException;
 import com.DFA.ecommerce.models.Items;
 import com.DFA.ecommerce.models.Orders;
 import com.DFA.ecommerce.models.TransactionRequestDto;
@@ -14,11 +15,11 @@ public class OrderTransactionService {
     @Autowired
     OrderService orderService;
 
-    public void takeOrder(TransactionRequestDto transactionRequestDto) throws Exception {
+    public void takeOrder(TransactionRequestDto transactionRequestDto) throws QuantityException {
         Long item_id = transactionRequestDto.getItem_id();
         Items items = itemService.getItemById(item_id);
-        if (items.getQuantity() < transactionRequestDto.getQuantity()){
-            throw new Exception("Order quantity exceeds available quantity");
+        if (items.getQuantity() < transactionRequestDto.getQuantity()) {
+            throw new QuantityException("Ordered quantity exceeds available quantity");
         }
         else {
             Orders orders = new Orders();

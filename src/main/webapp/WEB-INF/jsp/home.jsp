@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/home.css">
     <link rel="Stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 </head>
@@ -103,24 +104,26 @@
             </div>
         </div>
     </div>
-    <h1>Daily Cart</h1>
-    <div class="container">
-        <div class="row">
-            <div class="col info-1">
-                <div>Total Categories</div>
-                <div>${totalCategory}</div>
-            </div>
-            <div class="col info-2">
-                <div>Total Items</div>
-                <div>${totalItems}</div>
-            </div>
-            <div class="col info-3">
-                <div>Top Selling Category</div>
-                <div>${bestCategory}</div>
-            </div>
-            <div class="col info-4">
-                <div>Top selling Item</div>
-                <div>${bestItem}</div>
+    <div id="header">
+        <h1>Daily Cart</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col info-1">
+                    <div>Total Categories</div>
+                    <div>${totalCategory}</div>
+                </div>
+                <div class="col info-2">
+                    <div>Total Items</div>
+                    <div>${totalItems}</div>
+                </div>
+                <div class="col info-3">
+                    <div>Top Selling Category</div>
+                    <div>${bestCategory}</div>
+                </div>
+                <div class="col info-4">
+                    <div>Top selling Item</div>
+                    <div>${bestItem}</div>
+                </div>
             </div>
         </div>
     </div>
@@ -140,9 +143,6 @@
             <tbody id="itemTableBody"></tbody>
         </table>
         <div id="pageNavPosition" class="pager-nav"></div>
-    </div>
-
-    <div class="container">
         <button class="btn" onclick="addItemModal()">Add Item</button>
         <button class="btn" onclick="deleteItemModal()">Delete Item</button>
         <button class="btn" onclick="updateItemModal()">Update Item</button>
@@ -175,5 +175,15 @@
         loadOrderTable(orders);
 
     </script>
+    <style type="text/css">
+        @font-face{
+            font-family:"comic-boys-regular";
+            src:url("https://dafonttop.com/wp-data/c/872/14872/file/ComicBoys-GOK0g.otf") format("woff"),
+            url("https://dafonttop.com/wp-data/c/872/14872/file/ComicBoys-GOK0g.otf") format("opentype"),
+            url("https://dafonttop.com/wp-data/c/872/14872/file/ComicBoys-GOK0g.otf") format("truetype");
+        }
+        h1 {
+            font-family: "comic-boys-regular";text-transform:none;}
+    </style>
 </body>
 </html>

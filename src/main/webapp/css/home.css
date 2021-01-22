@@ -1,3 +1,13 @@
+body {
+    background-image: url("../images/background.jpg");
+}
+#header {
+    margin-bottom: 50px;
+    background-image: url("../images/Header-World-Map.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 550px;
+}
 .modal {
     display: none;
     position: fixed;
@@ -56,23 +66,31 @@
     margin: 20px;
     padding: 20px;
     border-radius: 10px;
-    color: black;
-    font-size: medium;
+    color: white;
+    font-size: larger;
+    width: 300px;
+    flex-basis: auto;
 }
 .info-1 {
-    background-color: rgb(104, 226, 226);
+    background-color: #2b2a2b;
 }
 .info-2 {
-    background-color: blueviolet;
+    background-color: #2b2a2b;
 }
 .info-3 {
-    background-color: rgb(30, 255, 0);
+    background-color: #2b2a2b;
 }
 .info-4 {
-    background-color: rgb(232, 148, 115);
+    background-color: #2b2a2b;
+}
+h1 {
+    margin-top: 20px;
+    margin-left: 20px;
+    font-family: comic-boys-regural, serif;
+    font-size: xxx-large;
 }
 .container {
-    margin-top: 100px;
+    margin-bottom: 100px;
     max-width: 1000px;
     margin-right:auto;
     margin-left:auto;
@@ -92,7 +110,7 @@ thead {
     color: white;
 }
 .btn{
-    background-color: #7f9ef7;
+    background-color: #25be3e82;
 }
 .pager-nav {
     margin: 16px 0;

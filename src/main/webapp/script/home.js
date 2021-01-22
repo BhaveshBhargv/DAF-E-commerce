@@ -84,9 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         return response.json()
                     })
                     .then(function (data) {
+                        alert(data.message)
                         console.log(data)
                     })
-                setTimeout(function(){window.location.reload();},1000);
+
             })
         });
     });
@@ -208,7 +209,7 @@ updateItemForm.addEventListener('submit', function (e) {
         .then(function (data) {
             console.log(data)
         })
-    setTimeout(function(){window.location.reload();},1000);
+    //setTimeout(function(){window.location.reload();},1000);
 });
 
 
