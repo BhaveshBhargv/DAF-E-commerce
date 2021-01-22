@@ -28,8 +28,10 @@ public class OrderService {
 
     public void updateOrder(Orders orders) {
         Orders updateOrders = orderRepository.findById(orders.getId()).orElseThrow(() -> new ItemNotFoundException(orders.getId()));;
-        updateOrders.setStatus(orders.getStatus());
-        orderRepository.saveAndFlush(orders);
+        if(orders.getStatus() != null) {
+            updateOrders.setStatus(orders.getStatus());
+        }
+        orderRepository.saveAndFlush(updateOrders);
     }
 
     public String bestItem() {

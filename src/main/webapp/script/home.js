@@ -1,3 +1,4 @@
+//Item Table Loader
 function loadItemTable(items) {
     const table = document.getElementById("itemTableBody");
     items.forEach( item => {
@@ -19,6 +20,9 @@ function loadItemTable(items) {
         order.appendChild(button);
     });
 }
+
+//Order Table Loader
+
 function loadOrderTable(orders) {
     const table = document.getElementById("orderTableBody");
     orders.forEach( order => {
@@ -44,12 +48,46 @@ function loadOrderTable(orders) {
         update_status.appendChild(button);
     });
 }
+
+
+//Transaction
+
+
 document.addEventListener('DOMContentLoaded', () => {
     let orderBtn = document.querySelectorAll(".addOrder")
     let modal = document.getElementById("modal")
     orderBtn.forEach(function (btn) {
         btn.addEventListener('click', () => {
             modal.style.display = "block";
+            let form = document.getElementById("form");
+            let temp = btn.parentElement.parentElement;
+            let temp2 = temp.children[0].innerHTML;
+            form.addEventListener('submit', function (e) {
+                e.preventDefault()
+                let order_quantity = document.getElementById("order_quantity").value
+                let contact_number = document.getElementById("contact_number").value
+                let address = document.getElementById("address").value
+
+                fetch("http://localhost:8080/transaction", {
+                    method:'POST',
+                    body:JSON.stringify({
+                        item_id: temp2,
+                        phone_number: contact_number,
+                        address: address,
+                        quantity: order_quantity,
+                    }),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+                    .then(function (response){
+                        return response.json()
+                    })
+                    .then(function (data) {
+                        console.log(data)
+                    })
+                setTimeout(function(){window.location.reload();},1000);
+            })
         });
     });
     let span = document.getElementsByClassName("close")[0]
@@ -57,61 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = "none";
     }
 });
-let form = document.getElementById("form");
-form.addEventListener('submit', function (e) {
-    e.preventDefault()
-    let item_name = document.getElementById("item_name").value
-    let order_quantity = document.getElementById("order_quantity").value
-    let contact_number = document.getElementById("contact_number").value
-    let address = document.getElementById("address").value
-
-    fetch("http://localhost:8080/home/orders/add", {
-        method:'POST',
-        body:JSON.stringify({
-            item_name: item_name,
-            contact_number: contact_number,
-            address: address,
-            order_quantity: order_quantity,
-            total_amount: 70,
-            status:"Order received",
-            category: "Dairy"
-        }),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-    })
-    .then(function (response){
-        return response.json()
-    })
-    .then(function (data) {
-        console.log(data)
-    })
-    setTimeout(function(){window.location.reload();},1000);
-})
-
-
-function loadItemFormList(list) {
-    const select = document.getElementById("item_name");
-    for (let i = 0; i < list.length; i++) {
-        let opt = list[i];
-        let el = document.createElement("option");
-        el.textContent = opt;
-        el.value = opt;
-        select.appendChild(el);
-    }
-}
-function loadOrderFormList(list) {
-    const select = document.getElementById("order_id");
-    for (let i = 0; i < list.length; i++) {
-        let opt = list[i];
-        let el = document.createElement("option");
-        el.textContent = opt;
-        el.value = opt;
-        select.appendChild(el);
-    }
-}
-
-
 
 function addItemModal() {
     let modal = document.getElementById("addItemModal");
@@ -121,6 +104,8 @@ function addItemModal() {
         modal.style.display = "none";
     }
 }
+
+//Add item
 
 let addItemForm = document.getElementById("addItemForm");
 addItemForm.addEventListener('submit', function (e) {
@@ -151,6 +136,8 @@ addItemForm.addEventListener('submit', function (e) {
     setTimeout(function(){window.location.reload();},1000);
 });
 
+
+//Delete Item
 
 function deleteItemModal() {
     let modal = document.getElementById("deleteItemModal");
@@ -183,6 +170,10 @@ deleteItemForm.addEventListener('submit', function (e) {
         })
     setTimeout(function(){window.location.reload();},1000);
 });
+
+
+//Update Item
+
 
 function updateItemModal() {
     let modal = document.getElementById("updateItemModal");
@@ -220,40 +211,71 @@ updateItemForm.addEventListener('submit', function (e) {
     setTimeout(function(){window.location.reload();},1000);
 });
 
+
+//Update Order
+
+
 document.addEventListener('DOMContentLoaded', () => {
     let orderBtn = document.querySelectorAll(".updateOrder")
     let modal = document.getElementById("updateOrderModal")
     orderBtn.forEach(function (btn) {
         btn.addEventListener('click', () => {
             modal.style.display = "block";
+            let updateOrderForm = document.getElementById("updateOrderForm");
+            updateOrderForm.addEventListener('submit', function (e) {
+                e.preventDefault()
+                let temp = btn.parentElement.parentElement;
+                let order_id = temp.children[0].innerHTML;
+                let update_status = document.getElementById("update_status").value
+
+                fetch("http://localhost:8080/home/orders/updateStatus", {
+                    method:'POST',
+                    body:JSON.stringify({
+                        id: order_id,
+                        status: update_status
+                    }),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+                    .then(function (response){
+                        return response.json()
+                    })
+                    .then(function (data) {
+                        console.log(data)
+                    })
+                setTimeout(function(){window.location.reload();},1000);
+            })
         });
     });
-    let span = document.getElementsByClassName("close")[0]
+    let span = document.getElementsByClassName("close")[4]
     span.onclick = function() {
         modal.style.display = "none";
     }
 });
-let updateOrderForm = document.getElementById("updateOrderForm");
-updateOrderForm.addEventListener('submit', function (e) {
-    e.preventDefault()
-    let order_id = document.getElementById("order_id").value
-    let update_status = document.getElementById("update_status").value
 
-    fetch("http://localhost:8080/home/orders/updateStatus", {
-        method:'POST',
-        body:JSON.stringify({
-            id: order_id,
-            status: update_status
-        }),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
+/*-----------Pagination---------Filtering---------------Sorting----------*/
+
+$(document).ready(function() {
+    $('#itemTable').DataTable( {
+        initComplete: function () {
+            this.api().columns().every( function () {
+                let column = this;
+                let select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        let val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
         }
-    })
-        .then(function (response){
-            return response.json()
-        })
-        .then(function (data) {
-            console.log(data)
-        })
-    setTimeout(function(){window.location.reload();},1000);
-})
+    } );
+} );

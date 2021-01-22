@@ -5,7 +5,9 @@
     <title>Items</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/home.css">
-
+    <link rel="Stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
     <div id="modal" class="modal">
@@ -16,11 +18,9 @@
             </div>
             <div class="modal-body">
                 <form id="form" method="post">
-                    <label for="item_name">Item:</label>
-                    <select id="item_name" name="item_name"></select><br><br>
                     <label for="order_quantity">Quantity:</label>
                     <input type="text" id="order_quantity" name="order_quantity"><br><br>
-                    <label for="contact_number">Contact NUmber:</label>
+                    <label for="contact_number">Contact Number:</label>
                     <input type="text" id="contact_number" name="contact_number"><br><br>
                     <label for="address">Address:</label>
                     <input type="text" id="address" name="address"><br><br>
@@ -92,8 +92,6 @@
             </div>
             <div class="modal-body">
                 <form id="updateOrderForm" method="post">
-                    <label for="order_id">Item:</label>
-                    <select id="order_id" name="order_id"></select><br><br>
                     <label for="update_status">Quantity:</label>
                     <select id="update_status">
                         <option>Order Received</option>
@@ -128,7 +126,7 @@
     </div>
     <div class="container">
         <h2>Items</h2>
-        <table id="itemTable" class="table table-striped">
+        <table id="itemTable" class="table table-striped display">
             <thead class="thead-dark">
                 <tr>
                     <th>Item Id</th>
@@ -141,7 +139,9 @@
             </thead>
             <tbody id="itemTableBody"></tbody>
         </table>
+        <div id="pageNavPosition" class="pager-nav"></div>
     </div>
+
     <div class="container">
         <button class="btn" onclick="addItemModal()">Add Item</button>
         <button class="btn" onclick="deleteItemModal()">Delete Item</button>
@@ -173,8 +173,7 @@
         const orderList = ${orderList};
         loadItemTable(items);
         loadOrderTable(orders);
-        loadItemFormList(itemsList);
-        loadOrderFormList(orderList);
+
     </script>
 </body>
 </html>

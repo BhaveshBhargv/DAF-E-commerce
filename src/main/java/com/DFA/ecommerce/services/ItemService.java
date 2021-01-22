@@ -43,17 +43,19 @@ public class ItemService {
     }
 
     public Long totalItems() {
-        Long items = itemRepository.count();
-        return items;
+        return itemRepository.count();
     }
 
     public Long totalCategory() {
-        Long category = itemRepository.findByCategory();
-        return category;
+        return itemRepository.findByCategory();
     }
 
     public List<String> itemList() {
         List<String> itemList= itemRepository.findByName();
         return itemList;
+    }
+
+    public Items getItemById(Long id) {
+        return itemRepository.getOne(id);
     }
 }
