@@ -110,7 +110,8 @@ thead {
     color: white;
 }
 .btn{
-    background-color: #25be3e82;
+    background-color: #f1c98b;
+    border-color: black;
 }
 .pager-nav {
     margin: 16px 0;
